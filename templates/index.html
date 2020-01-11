@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Swiggy crawler</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400">
+  <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
+</head>
+
+<body>
+<h1 align='center' top=100px>Get your food at the least price !!</h1>
+
+
+<div class="container">
+
+{% if 1<=p %}
+  <div class="card">
+    <h3 class="title">Enter Location</h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar1"></div>
+    </div>
+      <form id="frm" action="{{ url_for('index') }}" method = "post">
+      <input id="loc" name="loc" placeholder="At least three characters" required />
+    <button type="submit" id="butt"><i class="right"></i></button>
+    </form>
+  </div>
+    {% endif %}
+
+
+  {% if 2<=p %}
+    <div class="card">
+    <h3 class="title">Choose from below</h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar2"></div>
+    </div>
+    <form id="frm" action="{{ url_for('index') }}" method = "post">
+    <div id="number">
+      {% for i in range(0,5) %}
+        <input type="radio" name="options" value=" {{ x['data'][i]['place_id'] }}"> {{ x['data'][i]['place_id'] }}</input><br>
+      {% endfor %}
+    </div>
+      <button type="submit" id="butt"><i class="right"></i></button>
+      </form>
+  </div>
+  {% endif %}
+
+
+  {% if 3<=p %}
+    <div class="card">
+    <h3 class="title">Enter Dish</h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar3"></div>
+    </div>
+    <form id="frm" action="{{ url_for('index') }}" method = "post">
+      <input id="dish" name="dish" placeholder="e.g. Roti" required />
+        <button type="submit" id="butt"><i class="right"></i></button>
+        </form>
+  </div>
+  {% endif %}
+
+
+  {% if 4<=p %}
+  <div class="card">
+  <h3 class="title">Total Open Restaurants</h3>
+  <div class="bar">
+    <div class="emptybar"></div>
+    <div class="filledbar3"></div>
+    <h1 align='center'>{{ ttlopen }}</h1>
+    <form action="{{ url_for('index') }}" method = "post">
+      <input id="dish" name="con" value="tanzy" hidden/>
+        <button type="submit" id="butt1"><i class="right"></i></button>
+      </form>
+  </div>
+</div>
+{% endif %}
+</div>
+
+<div id="overlay">
+<div class="load">
+  <hr/><hr/><hr/><hr/>
+</div>
+</div>
+
+
+
+<script>
+var overlay = document.getElementById("overlay");
+
+window.addEventListener('load',function() {
+  overlay.style.display = 'none';
+})
+</script>
+</body>
+</html>
